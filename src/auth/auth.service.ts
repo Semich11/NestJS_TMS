@@ -20,12 +20,12 @@ export class AuthService {
 
 
   async register(createUserDto: CreateUserDto) {
-    const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+    // const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
 
-    const user = await this.usersService.create({
-      ...createUserDto,
-      password: hashedPassword,
-    });
+    const user = await this.usersService.create(
+      createUserDto
+      // password: hashedPassword,
+    );
 
     const { accessToken, refreshToken } = await this.generateTokens(user.id);
 
